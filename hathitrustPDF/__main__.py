@@ -3,7 +3,7 @@ import requests
 import re
 import os
 from pathlib import Path
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 import progressbar
 
 
@@ -50,8 +50,7 @@ bar.start()
 for actual_page in range(begin_page, last_page):
     output_line = f'https://babel.hathitrust.org/cgi/imgsrv/download/pdf?id={id_book};orient=0;size=100;seq={actual_page};attachment=0'
     PDFDownload(output_line)
-
-    while os.path.getsize(path_folder + 'page' + str(actual_page) + '.pdf') < 6000:
+    while os.path.getsize(path_folder + 'page' + str(actual_page) + '.pdf') < 650:
         PDFDownload(output_line)
 
     bar.update(actual_page + 1)
@@ -62,7 +61,7 @@ ordered_files = sorted(os.listdir(path_folder),
                        key=lambda x: (int(re.sub('\D', '', x)), x))
 
 pdf_list = [path_folder + a for a in ordered_files if a.endswith(".pdf")]
-merger = PdfFileMerger()
+merger = PdfMerger()
 
 for pdf in pdf_list:
     merger.append(open(pdf, 'rb'))

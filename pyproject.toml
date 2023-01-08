@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hathitrustPDF"
+description = "Download entire documents from hathitrust.org as guest"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT License"}
+dependencies = [
+    "beautifulsoup4==4.11.1",
+    "progressbar33==2.4",
+    "PyPDF2==3.0.1",
+    "requests==2.25.1",
+]
+dynamic = ["version"]
+
+[project.scripts]
+hathitrustPDF = "hathitrustPDF.__main__:main"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==7.2.0",
+    "responses==0.22.0"
+]
