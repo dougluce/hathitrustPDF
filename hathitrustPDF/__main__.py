@@ -3,7 +3,7 @@ import requests
 import re
 import os
 from pathlib import Path
-from PyPDF2 import PdfMerger
+from pypdf import PdfMerger
 import progressbar
 
 
