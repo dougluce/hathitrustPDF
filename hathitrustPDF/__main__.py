@@ -15,7 +15,7 @@ def PDFDownload(output_line):
 
 # Get hathitrust book link
 link = "https://babel.hathitrust.org/cgi/pt?id=txu.059173023561817"
-id_book = re.findall('id=(\w*\.\d*)|$', link)[0]
+id_book = re.findall('id=(\\w*\\.\\d*)|$', link)[0]
 r = requests.get(link)
 soup = BeautifulSoup(r.text, "html.parser")
 
@@ -58,7 +58,7 @@ for actual_page in range(begin_page, last_page):
 
 # Merge all pdf files
 ordered_files = sorted(os.listdir(path_folder),
-                       key=lambda x: (int(re.sub('\D', '', x)), x))
+                       key=lambda x: (int(re.sub('\\D', '', x)), x))
 
 pdf_list = [path_folder + a for a in ordered_files if a.endswith(".pdf")]
 merger = PdfMerger()
